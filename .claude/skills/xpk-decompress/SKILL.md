@@ -1,7 +1,7 @@
 ---
 name: xpk-decompress
 description: Decompress Amiga XPK/NUKE and DUKE compressed files. Use when user wants to unpack XPK, NUKE, or DUKE compressed Amiga files.
-argument-hint: [file-or-directory] [--output DIR] [--dry-run]
+argument-hint: "[file-or-directory] [--output DIR] [--dry-run]"
 allowed-tools: Bash(uv *) Read
 ---
 
