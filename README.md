@@ -1,6 +1,6 @@
-# Amiga XPK/NUKE Decompressor — Claude Code Skill
+# Amiga XPK/NUKE Decompressor
 
-A [Claude Code](https://docs.anthropic.com/en/docs/claude-code) skill that decompresses Amiga [XPK](http://aminet.net/package/util/pack/xpk_Develop)-compressed files using the **NUKE** and **DUKE** sub-packers.
+An agent plugin for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) and OpenAI Codex that decompresses Amiga [XPK](http://aminet.net/package/util/pack/xpk_Develop)-compressed files using the **NUKE** and **DUKE** sub-packers.
 
 Point it at a file or an entire directory tree and it will find and unpack every XPK/NUKE (or DUKE) compressed file, skipping everything else.
 
@@ -13,52 +13,63 @@ Point it at a file or an entire directory tree and it will find and unpack every
 | **Safety** | Header magic, checksum, and preview verification before any write |
 | **Dependencies** | Python 3 + [uv](https://github.com/astral-sh/uv) — no pip installs needed |
 
-## Installation
+## Install
 
-Copy the skill folder into your Claude Code skills directory:
+### Claude Code
 
-```bash
-# Clone the repo
-git clone https://github.com/mbackschat/amiga-xpk-decompress-skill.git
-
-# Copy the skill into place
-cp -r amiga-xpk-decompress-skill/.claude/skills/xpk-decompress ~/.claude/skills/
+```text
+/plugin marketplace add mbackschat/amiga-xpk-decompress-skill
+/plugin install xpk-decompress@xpk-decompress
 ```
 
-Or, if you prefer a one-liner:
+For local testing from this checkout, use the repository path instead of the GitHub shorthand:
 
-```bash
-git clone https://github.com/mbackschat/amiga-xpk-decompress-skill.git /tmp/xpk-skill \
-  && mkdir -p ~/.claude/skills \
-  && cp -r /tmp/xpk-skill/.claude/skills/xpk-decompress ~/.claude/skills/ \
-  && rm -rf /tmp/xpk-skill
+```text
+/plugin marketplace add /path/to/amiga-xpk-decompress-skill
+/plugin install xpk-decompress@xpk-decompress
 ```
 
-After installation, restart Claude Code. The `/xpk-decompress` slash command will be available.
+### OpenAI Codex
+
+```text
+codex plugin marketplace add mbackschat/amiga-xpk-decompress-skill
+codex plugin add xpk-decompress@xpk-decompress
+```
+
+For local testing from this checkout:
+
+```text
+codex plugin marketplace add /path/to/amiga-xpk-decompress-skill
+codex plugin add xpk-decompress@xpk-decompress
+```
+
+Both hosts use the same shared skill under [skills/xpk-decompress](skills/xpk-decompress/SKILL.md). The host-specific packaging is limited to `.claude-plugin/`, `.codex-plugin/`, and `.agents/plugins/marketplace.json`.
 
 ## Usage
 
-Inside Claude Code, use the skill as a slash command:
+Inside Claude Code, use the installed skill as a namespaced slash command:
 
 ```
-/xpk-decompress /path/to/compressed/files -o /path/to/output
+/xpk-decompress:xpk-decompress /path/to/compressed/files -o /path/to/output
 ```
+
+In Codex, ask directly, e.g. "Use xpk-decompress to unpack `/path/to/compressed/files` into `/path/to/output`."
 
 ### Examples
 
 **Decompress a single file:**
 ```
-/xpk-decompress game.lha.nuke -o ./unpacked/
+/xpk-decompress:xpk-decompress game.lha.nuke -o ./unpacked/
 ```
 
 **Decompress an entire directory recursively (in place):**
 ```
-/xpk-decompress /home/user/amiga-sources/
+/xpk-decompress:xpk-decompress /home/user/amiga-sources/
 ```
 
 **Dry run — list compressed files without writing:**
 ```
-/xpk-decompress /path/to/directory --dry-run
+/xpk-decompress:xpk-decompress /path/to/directory --dry-run
 ```
 
 ### Flags
@@ -83,16 +94,38 @@ Non-XPK files are silently skipped, so it is safe to point the tool at a mixed d
 
 ## Standalone usage
 
-The Python script can also be used directly without Claude Code:
+The Python script can also be used directly without an agent:
 
 ```bash
-uv run python3 .claude/skills/xpk-decompress/xpk_nuke_decompress.py /path/to/files -o /output
+uv run python3 skills/xpk-decompress/scripts/xpk_nuke_decompress.py /path/to/files -o /output
 ```
 
 Or with plain Python:
 
 ```bash
-python3 .claude/skills/xpk-decompress/xpk_nuke_decompress.py /path/to/files -o /output
+python3 skills/xpk-decompress/scripts/xpk_nuke_decompress.py /path/to/files -o /output
+```
+
+## Layout
+
+```text
+.
+├── .claude-plugin/
+│   ├── plugin.json
+│   └── marketplace.json
+├── .codex-plugin/
+│   └── plugin.json
+├── .agents/
+│   └── plugins/
+│       └── marketplace.json
+├── skills/
+│   └── xpk-decompress/
+│       ├── SKILL.md
+│       ├── agents/openai.yaml
+│       └── scripts/xpk_nuke_decompress.py
+├── tests/
+├── README.md
+└── LICENSE
 ```
 
 ## License

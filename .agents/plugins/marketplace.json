@@ -1,0 +1,20 @@
+{
+  "name": "xpk-decompress",
+  "interface": {
+    "displayName": "Amiga XPK Decompressor"
+  },
+  "plugins": [
+    {
+      "name": "xpk-decompress",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    }
+  ]
+}

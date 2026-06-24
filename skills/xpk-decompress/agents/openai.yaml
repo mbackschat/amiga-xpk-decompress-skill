@@ -1,0 +1,7 @@
+interface:
+  display_name: "Amiga XPK Decompressor"
+  short_description: "Decompress Amiga XPK/NUKE and DUKE files"
+  default_prompt: "Use $xpk-decompress to unpack this Amiga XPK directory: <path>"
+
+policy:
+  allow_implicit_invocation: true

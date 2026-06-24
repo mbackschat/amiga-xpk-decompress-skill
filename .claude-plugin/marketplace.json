@@ -1,0 +1,16 @@
+{
+  "name": "xpk-decompress",
+  "owner": {
+    "name": "Martin Backschat",
+    "url": "https://github.com/mbackschat"
+  },
+  "description": "Install the Amiga XPK decompressor skill for Claude Code.",
+  "plugins": [
+    {
+      "name": "xpk-decompress",
+      "source": "./",
+      "version": "1.0.0",
+      "description": "Decompress Amiga XPK/NUKE and DUKE compressed files."
+    }
+  ]
+}

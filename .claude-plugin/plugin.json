@@ -1,0 +1,19 @@
+{
+  "name": "xpk-decompress",
+  "description": "Decompress Amiga XPK/NUKE and DUKE compressed files with a bundled Python skill.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Martin Backschat",
+    "url": "https://github.com/mbackschat"
+  },
+  "homepage": "https://github.com/mbackschat/amiga-xpk-decompress-skill",
+  "license": "MIT",
+  "keywords": [
+    "amiga",
+    "xpk",
+    "nuke",
+    "duke",
+    "decompress",
+    "archive"
+  ]
+}

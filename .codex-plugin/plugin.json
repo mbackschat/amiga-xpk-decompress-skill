@@ -1,0 +1,34 @@
+{
+  "name": "xpk-decompress",
+  "version": "1.0.0",
+  "description": "Decompress Amiga XPK/NUKE and DUKE compressed files.",
+  "author": {
+    "name": "Martin Backschat"
+  },
+  "homepage": "https://github.com/mbackschat/amiga-xpk-decompress-skill",
+  "repository": "https://github.com/mbackschat/amiga-xpk-decompress-skill",
+  "license": "MIT",
+  "keywords": [
+    "amiga",
+    "xpk",
+    "nuke",
+    "duke",
+    "decompress",
+    "archive"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Amiga XPK Decompressor",
+    "shortDescription": "Decompress Amiga XPK/NUKE and DUKE files.",
+    "longDescription": "Local skill and Python decompressor for unpacking Amiga XPK files that use the NUKE or DUKE sub-packers, with dry-run support and header/preview verification before writes.",
+    "developerName": "Martin Backschat",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Use xpk-decompress to unpack this Amiga XPK directory: <path>"
+    ],
+    "brandColor": "#2563EB"
+  }
+}

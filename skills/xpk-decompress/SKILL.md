@@ -1,18 +1,21 @@
 ---
 name: xpk-decompress
-description: Decompress Amiga XPK/NUKE and DUKE compressed files. Use when user wants to unpack XPK, NUKE, or DUKE compressed Amiga files.
-argument-hint: "[file-or-directory] [--output DIR] [--dry-run]"
-allowed-tools: Bash(uv *) Read
+description: Decompress Amiga XPK/NUKE and DUKE compressed files. Use when the user wants to unpack Amiga XPK files that use the NUKE or DUKE sub-packers, inspect a directory tree for supported XPK files, or safely dry-run an Amiga archive/source extraction workflow before writing output.
+metadata:
+  argument-hint: "[file-or-directory] [--output DIR] [--dry-run]"
 ---
 
 Decompress Amiga XPK/NUKE (and DUKE) compressed files using the bundled Python decompressor.
 
 ## How to run
 
-Use `uv run` to execute the script with no global installs required:
+Use `uv run` to execute the script with no global installs required.
+
+First resolve `SKILL_DIR` to the directory containing this `SKILL.md`. In Claude Code, prefer `${CLAUDE_SKILL_DIR}` when it is available. In Codex or another agent, use the installed plugin skill path, normally `<plugin-root>/skills/xpk-decompress`.
 
 ```bash
-uv run python3 ${CLAUDE_SKILL_DIR}/xpk_nuke_decompress.py $ARGUMENTS
+SKILL_DIR="${CLAUDE_SKILL_DIR:-<plugin-root>/skills/xpk-decompress}"
+uv run python3 "$SKILL_DIR/scripts/xpk_nuke_decompress.py" <file-or-directory> [--output DIR] [--dry-run]
 ```
 
 If no arguments were provided, ask the user for a file or directory path.
@@ -20,18 +23,21 @@ If no arguments were provided, ask the user for a file or directory path.
 ## Examples
 
 Decompress a single file to an output directory:
+
 ```bash
-uv run python3 ${CLAUDE_SKILL_DIR}/xpk_nuke_decompress.py /path/to/file.c -o /path/to/output/
+uv run python3 "$SKILL_DIR/scripts/xpk_nuke_decompress.py" /path/to/file.c -o /path/to/output/
 ```
 
 Decompress an entire directory (recursive) in place:
+
 ```bash
-uv run python3 ${CLAUDE_SKILL_DIR}/xpk_nuke_decompress.py /path/to/directory/
+uv run python3 "$SKILL_DIR/scripts/xpk_nuke_decompress.py" /path/to/directory/
 ```
 
 Dry run (list XPK/NUKE files without writing):
+
 ```bash
-uv run python3 ${CLAUDE_SKILL_DIR}/xpk_nuke_decompress.py /path/to/directory/ --dry-run
+uv run python3 "$SKILL_DIR/scripts/xpk_nuke_decompress.py" /path/to/directory/ --dry-run
 ```
 
 ## Flags
